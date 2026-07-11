@@ -54,9 +54,10 @@ RESEND_API_KEY=re_...   # a key scoped to THIS project, not the app's auth key
 ```
 
 Add the same variable to the Vercel project's environment. The Resend domain
-`getbillie.com.au` is already verified (domain-wide), so `hello@` sends with no
-new DNS. `hello@` is send-only and is **not** an inbox — auto-reply `replyTo`
-is always `info@`.
+`getbillie.com.au` is already verified (domain-wide), so both sender addresses
+send with no new DNS. The lead notification is sent from `info@`; the auto-reply
+is sent from `isaiah@` (with `replyTo` set to `isaiah@`) so replies reach Isaiah
+directly. `isaiah@` must exist as a Workspace alias before this goes live.
 
 ## Develop
 

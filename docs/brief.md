@@ -84,16 +84,17 @@ On valid POST, send TWO emails via Resend:
 
 **Email 1 - lead notification** (the one that matters)
 
-- from `BiLLiE <hello@getbillie.com.au>`, to `info@getbillie.com.au`
+- from `BiLLiE <info@getbillie.com.au>`, to `info@getbillie.com.au`
 - replyTo = the lead's email
 - subject `New BiLLiE lead - {practice}`
 - body: every field, plain text, one per line, labelled
 
 **Email 2 - auto-reply to the lead**
 
-- from `BiLLiE <hello@getbillie.com.au>`, to the lead
-- replyTo `info@getbillie.com.au` (hello@ is send-only, NOT an inbox)
-- subject / body from the copy, `{name}` and `{practice}` interpolated
+- from `Isaiah de Hoog <isaiah@getbillie.com.au>`, to the lead
+- replyTo `isaiah@getbillie.com.au` so replies reach Isaiah directly
+- subject `Welcome to BiLLiE, {name}`; subject/body from the copy, `{name}` and
+  `{practice}` interpolated (`isaiah@` must exist as a Workspace alias first)
 
 Email 2 failing must NOT fail the request (separate try/catch). 200 on success,
 400 with field errors on validation failure. Never echo submitted PII in an

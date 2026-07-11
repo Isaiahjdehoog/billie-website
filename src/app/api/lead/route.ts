@@ -8,8 +8,11 @@ import { HONEYPOT_FIELD, leadSchema, type Lead } from "@/lib/lead-schema";
 export const runtime = "edge";
 export const preferredRegion = "syd1";
 
-const FROM = "BiLLiE <hello@getbillie.com.au>";
+// Both addresses are real inboxes on the verified getbillie.com.au domain.
 const LEAD_INBOX = "info@getbillie.com.au";
+const LEAD_FROM = "BiLLiE <info@getbillie.com.au>";
+const AUTOREPLY_FROM = "Isaiah de Hoog <isaiah@getbillie.com.au>";
+const AUTOREPLY_REPLY_TO = "isaiah@getbillie.com.au";
 
 function leadEmailText(lead: Lead): string {
   const value = (key: string): string => {
@@ -59,7 +62,7 @@ export async function POST(request: Request) {
   // Email 1 - the lead notification. This is the one that matters. If it fails,
   // the whole request fails so the practice knows to retry.
   const { error: leadError } = await resend.emails.send({
-    from: FROM,
+    from: LEAD_FROM,
     to: LEAD_INBOX,
     replyTo: lead.email,
     subject: `New BiLLiE lead - ${lead.practice}`,
@@ -71,15 +74,15 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false }, { status: 500 });
   }
 
-  // Email 2 - the courtesy auto-reply. hello@ is send-only and NOT an inbox, so
-  // replyTo must be info@. A failure here must NOT fail the request: we already
-  // captured the lead. Log and move on.
+  // Email 2 - the courtesy auto-reply, sent as Isaiah personally so replies land
+  // in his inbox (replyTo isaiah@). A failure here must NOT fail the request: we
+  // already captured the lead. Log and move on.
   try {
     const { error: replyError } = await resend.emails.send({
-      from: FROM,
+      from: AUTOREPLY_FROM,
       to: lead.email,
-      replyTo: LEAD_INBOX,
-      subject: autoReply.subject,
+      replyTo: AUTOREPLY_REPLY_TO,
+      subject: autoReply.subject.replaceAll("{name}", lead.name),
       text: autoReply.body
         .replaceAll("{name}", lead.name)
         .replaceAll("{practice}", lead.practice),

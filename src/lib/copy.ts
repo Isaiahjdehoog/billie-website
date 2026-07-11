@@ -98,13 +98,16 @@ export const success = {
 };
 
 export const autoReply = {
-  subject: "You're on the BiLLiE founding list",
+  // {name} is interpolated into the subject server-side.
+  subject: "Welcome to BiLLiE, {name}",
   // {name} and {practice} are interpolated server-side from the submitted form.
   body: `Hi {name},
 
-Thanks for putting {practice} forward as a BiLLiE founding practice.
+I'm Isaiah. I built BiLLiE, and I built it inside our own clinic - because we were the ones losing whole days to billing.
 
-Quick bit of honesty: BiLLiE isn't generally available yet. We're building it against a real clinic's billing - DVA, WorkCover, third-party insurers, the lot - and opening it up to a small number of founding practices as we go.
+Thanks for putting {practice} forward. Welcome aboard.
+
+Here's the honest position: BiLLiE isn't open to everyone yet. We're taking on a small number of founding practices as we go, and yours is now one of the ones in front of me.
 
 What that means for you:
 
@@ -112,11 +115,13 @@ What that means for you:
 - First access when we open
 - We come to you. You don't have to keep checking back.
 
-I'll be in touch personally over the next few days to hear how your practice handles billing today.
+I'll be in touch personally over the next few days. I want to hear how {practice} handles billing right now - what's slow, what keeps coming back, what you'd never hand over to software. That's how BiLLiE gets built, and founding practices are the ones who get to shape it.
+
+Nothing for you to do in the meantime. Just reply to this email if you've got questions - it comes straight to me.
 
 Isaiah de Hoog
 Founder, BiLLiE
-info@getbillie.com.au`,
+isaiah@getbillie.com.au`,
 };
 
 export const footer = {
