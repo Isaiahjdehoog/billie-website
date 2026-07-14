@@ -87,14 +87,17 @@ export const comparison = {
   ],
   // The Bite (Change 3) replaces the brief's "BiLLiE does the rest..." line
   // with this one. It is the emotional payoff of the page - centred, given room.
-  closingLine:
-    "Watch the invoices go out on their own. You won't want to go back.",
+  closingLine: [
+    "Watch the invoices go out on their own.",
+    "You won't want to go back.",
+  ],
 };
 
 // The Bite (Change 2): a quiet manifesto beat between the comparison and How It
 // Works. No card, no icon - it needs silence around it to land.
 export const manifesto = {
-  heading: "Nobody ever fixed this. So we did.",
+  // Two-part heading: the component renders a line break between the sentences.
+  heading: ["Nobody ever fixed this.", "So we did."],
   body: [
     "Clinics have been doing claims by hand for as long as there have been claims. Not because anyone chose to. Because nobody ever built them anything better.",
     "Portals that don't talk to each other. Item codes that change without warning. An inbox full of insurers who each want it their own way.",
@@ -129,7 +132,8 @@ export const payers = {
 // First person. This is Isaiah speaking - the trust section. It must not read
 // like marketing.
 export const origin = {
-  heading: "This wasn't built for clinics. It was built in one.",
+  // Two-part heading: the component renders a line break between the sentences.
+  heading: ["This wasn't built for clinics.", "It was built in one."],
   body: [
     "I didn't set out to build software. I set out to stop losing my Fridays.",
     "Our clinic bills DVA, WorkCover, and a long tail of third parties. Every one of them wants something different. For years the answer was the same: someone sits down and does it.",

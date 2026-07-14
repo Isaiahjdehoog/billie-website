@@ -5,10 +5,10 @@ export function Hero() {
     <section className="bg-bone">
       <div className="mx-auto w-full max-w-content px-5 pb-16 pt-14 sm:px-8 sm:pb-24 sm:pt-24">
         <div className="max-w-3xl">
-          <h1 className="font-serif text-[42px] font-[400] leading-[1.08] tracking-[-0.01em] text-ink md:text-[68px]">
+          <h1 className="font-serif text-[46px] font-[400] leading-[1.05] tracking-[-0.01em] text-ink md:text-[84px]">
             {hero.headline}
           </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink/75 sm:text-xl">
+          <p className="mt-6 max-w-2xl text-[17px] leading-relaxed text-ink/75 md:text-[18px]">
             {hero.sub}
           </p>
           <div className="mt-8">

@@ -10,7 +10,7 @@ export function Problem() {
               <h2 className="text-[19px] font-bold leading-snug text-ledger">
                 {block.heading}
               </h2>
-              <p className="mt-3 text-base leading-relaxed text-ink/75">
+              <p className="mt-3 text-[17px] leading-relaxed text-ink/75 md:text-[18px]">
                 {block.body}
               </p>
             </div>

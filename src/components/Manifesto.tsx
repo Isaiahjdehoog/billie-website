@@ -10,8 +10,10 @@ export function Manifesto() {
   return (
     <section className="border-t border-mist/20 bg-paper">
       <div className="mx-auto w-full max-w-2xl px-5 py-24 text-center sm:px-8 sm:py-32">
-        <h2 className="font-serif text-[32px] font-[400] leading-[1.15] text-ink md:text-[48px]">
-          {manifesto.heading}
+        <h2 className="font-serif text-[34px] font-[400] leading-[1.12] text-ink md:text-[56px]">
+          {manifesto.heading[0]}
+          <br />
+          {manifesto.heading[1]}
         </h2>
         <div className="mt-8 space-y-5">
           {manifesto.body.map((paragraph, i) => (
@@ -19,8 +21,8 @@ export function Manifesto() {
               key={paragraph}
               className={
                 i === last
-                  ? "text-lg font-medium leading-relaxed text-ink"
-                  : "text-lg leading-relaxed text-ink/75"
+                  ? "text-[17px] font-medium leading-relaxed text-ink md:text-[18px]"
+                  : "text-[17px] leading-relaxed text-ink/75 md:text-[18px]"
               }
             >
               {paragraph}
