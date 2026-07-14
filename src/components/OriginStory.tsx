@@ -10,7 +10,7 @@ export function OriginStory() {
       <div className="mx-auto w-full max-w-content px-5 py-16 sm:px-8 sm:py-24">
         <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr] lg:items-center lg:gap-16">
           <div className="max-w-2xl">
-            <h2 className="font-serif text-[28px] font-[400] leading-[1.15] text-ink md:text-[40px] md:font-[300]">
+            <h2 className="font-serif text-[28px] font-[400] leading-[1.15] text-ink md:text-[40px]">
               {origin.heading}
             </h2>
             {origin.body.map((paragraph) => (

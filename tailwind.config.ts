@@ -24,7 +24,7 @@ const config: Config = {
           "sans-serif",
         ],
         // Big headlines only (h1/h2, closing line, pull quote): Cormorant
-        // Garamond (loaded via next/font). Weight 300 desktop / 400 mobile.
+        // Garamond (loaded via next/font), weight 400 at every size.
         serif: ["var(--font-cormorant)", '"Times New Roman"', "Times", "serif"],
         // Label voice + step numbers: JetBrains Mono (loaded via next/font).
         mono: ["var(--font-jetbrains)", "ui-monospace", "SFMono-Regular", "monospace"],

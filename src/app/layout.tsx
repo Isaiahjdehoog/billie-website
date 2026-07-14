@@ -6,12 +6,11 @@ import "./globals.css";
 
 // Body (Helvetica) is a system stack - no webfont. Three faces download.
 
-// Serif headlines only. Weight steps with the breakpoint: 300 on desktop (thin
-// hairlines read fine at large sizes), 400 on mobile (so they don't break up).
-// The weight switch lives in the component classes (font-[400] md:font-[300]).
+// Serif headlines only. Weight 400 at every size - lighter weights go weedy at
+// headline size and break up on a phone, so 400 is used throughout (no step).
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
-  weight: ["300", "400"],
+  weight: ["400"],
   variable: "--font-cormorant",
   display: "swap",
 });
