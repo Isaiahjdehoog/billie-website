@@ -12,14 +12,11 @@
     @apply bg-bone text-ink font-sans antialiased;
   }
 
-  /* Headlines only: Fraunces, warmed with SOFT/WONK. wght via font-weight,
-     opsz via optical sizing. Never a numeral (see .num). */
+  /* Headings default to the body face (Helvetica). The serif (Georgia) is opt-in
+     via font-serif, and only on h1 / section h2 / closing line / pull quote. */
   h1,
   h2,
   h3 {
-    font-family: var(--font-fraunces), Georgia, serif;
-    font-variation-settings: "SOFT" 30, "WONK" 1;
-    font-optical-sizing: auto;
     text-wrap: balance;
   }
 
@@ -30,13 +27,6 @@
 }
 
 @layer components {
-  /* Fraunces on non-heading display text (closing line, pull quote, payoff). */
-  .u-serif {
-    font-family: var(--font-fraunces), Georgia, serif;
-    font-variation-settings: "SOFT" 30, "WONK" 1;
-    font-optical-sizing: auto;
-  }
-
   /* The label voice: JetBrains Mono, small, letter-spaced. Sentence case only -
      the spacing IS the treatment, never all-caps. */
   .u-label {
@@ -47,8 +37,8 @@
     line-height: 1.2;
   }
 
-  /* Digits render in Helvetica, never Fraunces (Fraunces numerals fight the
-     layout). Applied wherever prose digits appear. */
+  /* Digits render in Helvetica, never the serif face. Applied to prose digits
+     (footer year, ap-southeast-2) as a guard. */
   .num {
     font-family: -apple-system, "Helvetica Neue", Helvetica, Arial, sans-serif;
   }

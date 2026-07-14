@@ -5,7 +5,7 @@ export function Hero() {
     <section className="bg-bone">
       <div className="mx-auto w-full max-w-content px-5 pb-16 pt-14 sm:px-8 sm:pb-24 sm:pt-24">
         <div className="max-w-3xl">
-          <h1 className="text-4xl font-semibold leading-[1.1] tracking-tight text-ink sm:text-[3.5rem]">
+          <h1 className="font-serif text-[34px] font-bold leading-[1.08] tracking-tight text-ink sm:text-[52px]">
             {hero.headline}
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink/75 sm:text-xl">

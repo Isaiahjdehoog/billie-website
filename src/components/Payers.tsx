@@ -6,10 +6,10 @@ export function Payers() {
   return (
     <section className="bg-ledger text-bone">
       <div className="mx-auto w-full max-w-content px-5 py-16 text-center sm:px-8 sm:py-20">
-        <p className="u-serif text-2xl font-semibold tracking-tight sm:text-3xl">
+        <p className="text-2xl font-bold tracking-tight sm:text-3xl">
           {payers.line1}
         </p>
-        <p className="u-serif mt-4 text-3xl font-semibold tracking-tight sm:text-5xl">
+        <p className="mt-4 text-3xl font-bold tracking-tight sm:text-5xl">
           {payers.line2}
         </p>
       </div>

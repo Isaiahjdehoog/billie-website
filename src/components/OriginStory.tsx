@@ -10,7 +10,7 @@ export function OriginStory() {
       <div className="mx-auto w-full max-w-content px-5 py-16 sm:px-8 sm:py-24">
         <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr] lg:items-center lg:gap-16">
           <div className="max-w-2xl">
-            <h2 className="text-[1.75rem] font-semibold leading-tight text-ink sm:text-4xl">
+            <h2 className="font-serif text-[26px] font-bold leading-[1.15] text-ink sm:text-[34px]">
               {origin.heading}
             </h2>
             {origin.body.map((paragraph) => (
@@ -32,7 +32,7 @@ export function OriginStory() {
               {origin.pullQuote.map((line) => (
                 <p
                   key={line}
-                  className="u-serif text-2xl font-medium leading-snug text-ink"
+                  className="font-serif text-2xl font-normal leading-snug text-ink"
                 >
                   {line}
                 </p>

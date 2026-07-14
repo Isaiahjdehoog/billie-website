@@ -1,18 +1,11 @@
 import type { Metadata } from "next";
-import { Fraunces, JetBrains_Mono, Kalam } from "next/font/google";
+import { JetBrains_Mono, Kalam } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { meta } from "@/lib/copy";
 import "./globals.css";
 
-// Headlines only. Variable, with SOFT/WONK dialled in via font-variation-settings
-// (see globals.css .u-serif) so it reads warm at display sizes. wght via
-// font-weight. Never body, never a numeral.
-const fraunces = Fraunces({
-  subsets: ["latin"],
-  axes: ["opsz", "SOFT", "WONK"],
-  variable: "--font-fraunces",
-  display: "swap",
-});
+// Serif (Georgia) and body (Helvetica) are system fonts - no webfont. Only the
+// label voice and the wordmark are downloaded.
 
 // Label voice: eyebrows, form labels, status bar, step numbers.
 const jetbrainsMono = JetBrains_Mono({
@@ -61,7 +54,7 @@ export default function RootLayout({
   return (
     <html
       lang="en-AU"
-      className={`${fraunces.variable} ${jetbrainsMono.variable} ${kalam.variable}`}
+      className={`${jetbrainsMono.variable} ${kalam.variable}`}
     >
       <body>
         {children}

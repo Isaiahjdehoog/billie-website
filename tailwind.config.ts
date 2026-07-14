@@ -23,6 +23,9 @@ const config: Config = {
           "Arial",
           "sans-serif",
         ],
+        // Big headlines only (h1/h2, closing line, pull quote): Georgia system
+        // stack. No webfont.
+        serif: ["Georgia", '"Times New Roman"', "Times", "serif"],
         // Label voice + step numbers: JetBrains Mono (loaded via next/font).
         mono: ["var(--font-jetbrains)", "ui-monospace", "SFMono-Regular", "monospace"],
         // Wordmark only: Kalam (loaded via next/font).

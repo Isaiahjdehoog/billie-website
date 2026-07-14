@@ -11,7 +11,7 @@ export function Comparison() {
   return (
     <section className="border-t border-mist/20 bg-bone">
       <div className="mx-auto w-full max-w-content px-5 py-16 sm:px-8 sm:py-24">
-        <h2 className="text-[1.75rem] font-semibold leading-tight text-ink sm:text-4xl">
+        <h2 className="font-serif text-[26px] font-bold leading-[1.15] text-ink sm:text-[34px]">
           {comparison.heading}
         </h2>
 
@@ -64,7 +64,7 @@ export function Comparison() {
         </div>
 
         {/* The payoff (The Bite, Change 3) - centred, larger than body, room. */}
-        <p className="u-serif mx-auto mt-12 max-w-2xl text-center text-[1.75rem] font-medium leading-snug text-ink sm:mt-16 sm:text-[2rem]">
+        <p className="mx-auto mt-12 max-w-2xl text-center font-serif text-[28px] font-bold leading-[1.15] text-ink sm:mt-16 sm:text-[32px]">
           {comparison.closingLine}
         </p>
       </div>

@@ -7,7 +7,7 @@ export function Problem() {
         <div className="grid gap-10 sm:grid-cols-3 sm:gap-8">
           {problem.blocks.map((block) => (
             <div key={block.heading}>
-              <h2 className="text-[1.375rem] font-semibold leading-snug text-ledger">
+              <h2 className="text-[19px] font-bold leading-snug text-ledger">
                 {block.heading}
               </h2>
               <p className="mt-3 text-base leading-relaxed text-ink/75">

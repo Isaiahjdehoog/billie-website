@@ -144,7 +144,7 @@ export function ApplyForm() {
       >
         <div className="mx-auto w-full max-w-2xl px-5 py-16 sm:px-8 sm:py-24">
           <div className="rounded-2xl border border-ledger/20 bg-paper p-8 sm:p-10">
-            <h2 className="text-[1.75rem] font-semibold leading-tight text-ledger sm:text-4xl">
+            <h2 className="font-serif text-[26px] font-bold leading-[1.15] text-ledger sm:text-[34px]">
               {success.heading}
             </h2>
             {success.body.map((paragraph) => (
@@ -169,7 +169,7 @@ export function ApplyForm() {
   return (
     <section id="apply" className="border-t border-mist/20 bg-bone scroll-mt-20">
       <div className="mx-auto w-full max-w-2xl px-5 py-16 sm:px-8 sm:py-24">
-        <h2 className="text-[1.75rem] font-semibold leading-tight text-ink sm:text-4xl">
+        <h2 className="font-serif text-[26px] font-bold leading-[1.15] text-ink sm:text-[34px]">
           {apply.heading}
         </h2>
         {apply.sub.map((paragraph) => (
