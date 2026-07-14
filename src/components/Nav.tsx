@@ -7,7 +7,7 @@ export function Nav() {
         <a
           href="#top"
           aria-label={WORDMARK}
-          className="font-wordmark text-2xl leading-none text-ledger sm:text-3xl"
+          className="font-wordmark text-2xl font-bold leading-none text-ledger sm:text-3xl"
         >
           {WORDMARK}
         </a>

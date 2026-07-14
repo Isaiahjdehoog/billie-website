@@ -12,8 +12,8 @@
     @apply bg-bone text-ink font-sans antialiased;
   }
 
-  /* Headings default to the body face (Helvetica). The serif (Georgia) is opt-in
-     via font-serif, and only on h1 / section h2 / closing line / pull quote. */
+  /* Headings default to the body face (Helvetica). The serif (Cormorant) is
+     opt-in via font-serif, only on h1 / section h2 / closing line / pull quote. */
   h1,
   h2,
   h3 {

@@ -1,11 +1,20 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono, Kalam } from "next/font/google";
+import { Cormorant_Garamond, JetBrains_Mono, Kalam } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { meta } from "@/lib/copy";
 import "./globals.css";
 
-// Serif (Georgia) and body (Helvetica) are system fonts - no webfont. Only the
-// label voice and the wordmark are downloaded.
+// Body (Helvetica) is a system stack - no webfont. Three faces download.
+
+// Serif headlines only. Weight steps with the breakpoint: 300 on desktop (thin
+// hairlines read fine at large sizes), 400 on mobile (so they don't break up).
+// The weight switch lives in the component classes (font-[400] md:font-[300]).
+const cormorant = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["300", "400"],
+  variable: "--font-cormorant",
+  display: "swap",
+});
 
 // Label voice: eyebrows, form labels, status bar, step numbers.
 const jetbrainsMono = JetBrains_Mono({
@@ -18,7 +27,7 @@ const jetbrainsMono = JetBrains_Mono({
 // Wordmark only.
 const kalam = Kalam({
   subsets: ["latin"],
-  weight: ["400", "700"],
+  weight: ["700"],
   variable: "--font-kalam",
   display: "swap",
 });
@@ -54,7 +63,7 @@ export default function RootLayout({
   return (
     <html
       lang="en-AU"
-      className={`${jetbrainsMono.variable} ${kalam.variable}`}
+      className={`${cormorant.variable} ${jetbrainsMono.variable} ${kalam.variable}`}
     >
       <body>
         {children}
