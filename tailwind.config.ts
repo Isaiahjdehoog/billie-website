@@ -15,7 +15,7 @@ const config: Config = {
         mist: "#A8A29E", // muted text, hairlines
       },
       fontFamily: {
-        // Body: Helvetica / Arial system stack
+        // Body AND every numeral: Helvetica / Arial system stack. No webfont.
         sans: [
           "-apple-system",
           '"Helvetica Neue"',
@@ -23,9 +23,12 @@ const config: Config = {
           "Arial",
           "sans-serif",
         ],
-        // Headers: Jost (loaded via next/font), Futura substitute
-        display: ["var(--font-jost)", '"Futura"', '"Century Gothic"', "sans-serif"],
-        // Wordmark only: Kalam (loaded via next/font)
+        // Big headlines only (h1/h2, closing line, pull quote): Cormorant
+        // Garamond (loaded via next/font), weight 400 at every size.
+        serif: ["var(--font-cormorant)", '"Times New Roman"', "Times", "serif"],
+        // Label voice + step numbers: JetBrains Mono (loaded via next/font).
+        mono: ["var(--font-jetbrains)", "ui-monospace", "SFMono-Regular", "monospace"],
+        // Wordmark only: Kalam (loaded via next/font).
         wordmark: ["var(--font-kalam)", "cursive"],
       },
       maxWidth: {

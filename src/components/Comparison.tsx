@@ -11,16 +11,14 @@ export function Comparison() {
   return (
     <section className="border-t border-mist/20 bg-bone">
       <div className="mx-auto w-full max-w-content px-5 py-16 sm:px-8 sm:py-24">
-        <h2 className="font-display text-2xl font-semibold text-ink sm:text-3xl">
+        <h2 className="font-serif text-[32px] font-[400] leading-[1.15] text-ink md:text-[48px]">
           {comparison.heading}
         </h2>
 
         <div className="mt-10 grid items-start gap-6 sm:grid-cols-2">
           {/* Right now - no fill, thin Mist border, faded Mist text, dense. */}
           <div className="rounded-2xl border border-mist/40 p-6 sm:p-8">
-            <p className="font-display text-sm font-semibold tracking-wide text-mist">
-              {comparison.leftLabel}
-            </p>
+            <p className="u-label text-mist">{comparison.leftLabel}</p>
             <ul className="mt-5 space-y-2.5">
               {comparison.leftSteps.map((step, i) => {
                 // The rejection loop is the point of the section: Clay, medium
@@ -49,9 +47,7 @@ export function Comparison() {
           {/* With BiLLiE - solid Paper fill, Ledger border, larger Ledger text,
               generous padding (~2x the left card). Short and calm by design. */}
           <div className="rounded-2xl border border-ledger/50 bg-paper px-6 py-12 sm:px-8 sm:py-16">
-            <p className="font-display text-sm font-semibold tracking-wide text-ledger">
-              {comparison.rightLabel}
-            </p>
+            <p className="u-label text-ledger">{comparison.rightLabel}</p>
             <ul className="mt-5 space-y-4">
               {comparison.rightSteps.map((step) => (
                 <li key={step} className="flex gap-3 text-ledger">
@@ -68,7 +64,7 @@ export function Comparison() {
         </div>
 
         {/* The payoff (The Bite, Change 3) - centred, larger than body, room. */}
-        <p className="mx-auto mt-12 max-w-2xl text-center font-display text-2xl font-semibold leading-snug text-ink sm:mt-16 sm:text-3xl">
+        <p className="mx-auto mt-12 max-w-2xl text-center font-serif text-[30px] font-[400] leading-[1.15] text-ink sm:mt-16 md:text-[44px]">
           {comparison.closingLine}
         </p>
       </div>

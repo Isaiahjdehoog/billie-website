@@ -1,4 +1,20 @@
+import { Fragment } from "react";
 import { footer } from "@/lib/copy";
+
+// Digit runs render in Helvetica via .num. The footer is already Helvetica, so
+// this is a guard, not a visual change - it keeps the "© 2026" year and the
+// "ap-southeast-2" region out of any serif context for good.
+function withNumerals(text: string) {
+  return text.split(/(\d[\d-]*)/).map((part, i) =>
+    /^\d/.test(part) ? (
+      <span key={i} className="num">
+        {part}
+      </span>
+    ) : (
+      <Fragment key={i}>{part}</Fragment>
+    ),
+  );
+}
 
 // Renders the four footer lines verbatim. Line 2 is load-bearing (SES
 // production-access alignment) - it stays exactly as written in copy.ts.
@@ -19,7 +35,7 @@ export function Footer() {
                 </a>
               </p>
             ) : (
-              <p key={line}>{line}</p>
+              <p key={line}>{withNumerals(line)}</p>
             ),
           )}
         </div>

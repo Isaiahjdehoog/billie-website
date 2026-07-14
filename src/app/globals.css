@@ -12,10 +12,11 @@
     @apply bg-bone text-ink font-sans antialiased;
   }
 
+  /* Headings default to the body face (Helvetica). The serif (Cormorant) is
+     opt-in via font-serif, only on h1 / section h2 / closing line / pull quote. */
   h1,
   h2,
   h3 {
-    @apply font-display;
     text-wrap: balance;
   }
 
@@ -25,8 +26,99 @@
   }
 }
 
+@layer components {
+  /* The label voice: JetBrains Mono, small, letter-spaced. Sentence case only -
+     the spacing IS the treatment, never all-caps. */
+  .u-label {
+    font-family: var(--font-jetbrains), ui-monospace, SFMono-Regular, monospace;
+    font-weight: 500;
+    font-size: 0.8125rem; /* 13px */
+    letter-spacing: 0.05em;
+    line-height: 1.2;
+  }
+
+  /* Digits render in Helvetica, never the serif face. Applied to prose digits
+     (footer year, ap-southeast-2) as a guard. */
+  .num {
+    font-family: -apple-system, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+
+  /* CTA text-roll: label rendered twice inside a one-line mask; on hover the
+     stack translates up exactly one line-height so the copy rolls over, while
+     the background moves Ledger -> Clay in the same 260ms motion. Mask height,
+     label height and the hover translate MUST all stay 1.25em or the label
+     lands half-cut. Label font is Helvetica 500 (inherited body face). */
+  .btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 26px;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    background: #1a5d3a; /* Ledger */
+    overflow: hidden;
+    cursor: pointer;
+    text-decoration: none;
+    transition:
+      background-color 260ms cubic-bezier(0.2, 0.8, 0.2, 1),
+      border-color 260ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .btn:hover {
+    background: #c2553d; /* Clay */
+  }
+  .btn:focus-visible {
+    outline: 2px solid #1a5d3a;
+    outline-offset: 2px;
+  }
+
+  .btn__mask {
+    display: block;
+    overflow: hidden;
+    height: 1.25em;
+    line-height: 1.25em;
+    font-size: 16px;
+    font-weight: 500;
+  }
+  .btn__inner {
+    display: flex;
+    flex-direction: column;
+    transition: transform 260ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .btn:hover .btn__inner {
+    transform: translateY(-1.25em);
+  }
+  .btn__label {
+    height: 1.25em;
+    line-height: 1.25em;
+    white-space: nowrap;
+    color: #faf5ec; /* Bone */
+  }
+
+  /* Compact variant for the nav (the roll uses em units, so it scales with the
+     smaller font-size automatically). */
+  .btn--sm {
+    padding: 8px 14px;
+  }
+  .btn--sm .btn__mask {
+    font-size: 13px;
+  }
+  @media (min-width: 640px) {
+    .btn--sm .btn__mask {
+      font-size: 14px;
+    }
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+  /* Disable the roll; the Ledger -> Clay colour change still happens. */
+  .btn__inner {
+    transition: none;
+  }
+  .btn:hover .btn__inner {
+    transform: none;
   }
 }

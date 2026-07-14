@@ -1,20 +1,32 @@
 import type { Metadata } from "next";
-import { Jost, Kalam } from "next/font/google";
+import { Cormorant_Garamond, JetBrains_Mono, Kalam } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { meta } from "@/lib/copy";
 import "./globals.css";
 
-const jost = Jost({
+// Body (Helvetica) is a system stack - no webfont. Three faces download.
+
+// Serif headlines only. Weight 400 at every size - lighter weights go weedy at
+// headline size and break up on a phone, so 400 is used throughout (no step).
+const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-jost",
+  weight: ["400"],
+  variable: "--font-cormorant",
+  display: "swap",
+});
+
+// Label voice: eyebrows, form labels, status bar, step numbers.
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-jetbrains",
   display: "swap",
 });
 
 // Wordmark only.
 const kalam = Kalam({
   subsets: ["latin"],
-  weight: ["400", "700"],
+  weight: ["700"],
   variable: "--font-kalam",
   display: "swap",
 });
@@ -48,7 +60,10 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en-AU" className={`${jost.variable} ${kalam.variable}`}>
+    <html
+      lang="en-AU"
+      className={`${cormorant.variable} ${jetbrainsMono.variable} ${kalam.variable}`}
+    >
       <body>
         {children}
         <Analytics />

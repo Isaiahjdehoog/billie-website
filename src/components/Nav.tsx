@@ -7,16 +7,20 @@ export function Nav() {
         <a
           href="#top"
           aria-label={WORDMARK}
-          className="font-wordmark text-2xl leading-none text-ledger sm:text-3xl"
+          className="font-wordmark text-2xl font-bold leading-none text-ledger sm:text-3xl"
         >
           {WORDMARK}
         </a>
         <nav className="flex items-center gap-3 sm:gap-6">
-          <a
-            href={nav.cta.href}
-            className="inline-flex items-center justify-center rounded-full bg-ledger px-3 py-2 font-display text-xs font-semibold text-bone transition-colors hover:bg-ledger/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ledger sm:px-4 sm:text-sm"
-          >
-            {nav.cta.label}
+          <a href={nav.cta.href} className="btn btn--sm">
+            <span className="btn__mask">
+              <span className="btn__inner">
+                <span className="btn__label">{nav.cta.label}</span>
+                <span className="btn__label" aria-hidden="true">
+                  {nav.cta.label}
+                </span>
+              </span>
+            </span>
           </a>
         </nav>
       </div>
