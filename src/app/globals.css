@@ -12,16 +12,45 @@
     @apply bg-bone text-ink font-sans antialiased;
   }
 
+  /* Headlines only: Fraunces, warmed with SOFT/WONK. wght via font-weight,
+     opsz via optical sizing. Never a numeral (see .num). */
   h1,
   h2,
   h3 {
-    @apply font-display;
+    font-family: var(--font-fraunces), Georgia, serif;
+    font-variation-settings: "SOFT" 30, "WONK" 1;
+    font-optical-sizing: auto;
     text-wrap: balance;
   }
 
   /* Respect a larger scroll offset so #apply doesn't tuck under the sticky nav. */
   :target {
     scroll-margin-top: 5rem;
+  }
+}
+
+@layer components {
+  /* Fraunces on non-heading display text (closing line, pull quote, payoff). */
+  .u-serif {
+    font-family: var(--font-fraunces), Georgia, serif;
+    font-variation-settings: "SOFT" 30, "WONK" 1;
+    font-optical-sizing: auto;
+  }
+
+  /* The label voice: JetBrains Mono, small, letter-spaced. Sentence case only -
+     the spacing IS the treatment, never all-caps. */
+  .u-label {
+    font-family: var(--font-jetbrains), ui-monospace, SFMono-Regular, monospace;
+    font-weight: 500;
+    font-size: 0.8125rem; /* 13px */
+    letter-spacing: 0.05em;
+    line-height: 1.2;
+  }
+
+  /* Digits render in Helvetica, never Fraunces (Fraunces numerals fight the
+     layout). Applied wherever prose digits appear. */
+  .num {
+    font-family: -apple-system, "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 }
 

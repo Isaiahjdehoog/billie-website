@@ -54,10 +54,7 @@ function FieldShell({
 }) {
   return (
     <div>
-      <label
-        htmlFor={htmlFor}
-        className="block text-sm font-medium text-ink"
-      >
+      <label htmlFor={htmlFor} className="block u-label text-ink">
         {label}
         {optional ? (
           <span className="ml-1 font-sans font-normal text-mist">
@@ -147,7 +144,7 @@ export function ApplyForm() {
       >
         <div className="mx-auto w-full max-w-2xl px-5 py-16 sm:px-8 sm:py-24">
           <div className="rounded-2xl border border-ledger/20 bg-paper p-8 sm:p-10">
-            <h2 className="font-display text-2xl font-semibold text-ledger sm:text-3xl">
+            <h2 className="text-[1.75rem] font-semibold leading-tight text-ledger sm:text-4xl">
               {success.heading}
             </h2>
             {success.body.map((paragraph) => (
@@ -172,7 +169,7 @@ export function ApplyForm() {
   return (
     <section id="apply" className="border-t border-mist/20 bg-bone scroll-mt-20">
       <div className="mx-auto w-full max-w-2xl px-5 py-16 sm:px-8 sm:py-24">
-        <h2 className="font-display text-2xl font-semibold text-ink sm:text-3xl">
+        <h2 className="text-[1.75rem] font-semibold leading-tight text-ink sm:text-4xl">
           {apply.heading}
         </h2>
         {apply.sub.map((paragraph) => (
@@ -438,7 +435,7 @@ export function ApplyForm() {
           <button
             type="submit"
             disabled={status === "submitting"}
-            className="inline-flex w-full items-center justify-center rounded-full bg-ledger px-7 py-3.5 font-display text-base font-semibold text-bone transition-colors hover:bg-ledger/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ledger disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto"
+            className="inline-flex w-full items-center justify-center rounded-full bg-ledger px-7 py-3.5 text-base font-medium text-bone transition-colors hover:bg-ledger/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ledger disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto"
           >
             {status === "submitting" ? form.submittingLabel : form.submitLabel}
           </button>

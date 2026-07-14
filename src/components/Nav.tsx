@@ -14,7 +14,7 @@ export function Nav() {
         <nav className="flex items-center gap-3 sm:gap-6">
           <a
             href={nav.cta.href}
-            className="inline-flex items-center justify-center rounded-full bg-ledger px-3 py-2 font-display text-xs font-semibold text-bone transition-colors hover:bg-ledger/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ledger sm:px-4 sm:text-sm"
+            className="inline-flex items-center justify-center rounded-full bg-ledger px-3 py-2 text-xs font-medium text-bone transition-colors hover:bg-ledger/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ledger sm:px-4 sm:text-sm"
           >
             {nav.cta.label}
           </a>

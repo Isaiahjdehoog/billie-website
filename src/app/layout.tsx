@@ -1,13 +1,24 @@
 import type { Metadata } from "next";
-import { Jost, Kalam } from "next/font/google";
+import { Fraunces, JetBrains_Mono, Kalam } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { meta } from "@/lib/copy";
 import "./globals.css";
 
-const jost = Jost({
+// Headlines only. Variable, with SOFT/WONK dialled in via font-variation-settings
+// (see globals.css .u-serif) so it reads warm at display sizes. wght via
+// font-weight. Never body, never a numeral.
+const fraunces = Fraunces({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-jost",
+  axes: ["opsz", "SOFT", "WONK"],
+  variable: "--font-fraunces",
+  display: "swap",
+});
+
+// Label voice: eyebrows, form labels, status bar, step numbers.
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-jetbrains",
   display: "swap",
 });
 
@@ -48,7 +59,10 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en-AU" className={`${jost.variable} ${kalam.variable}`}>
+    <html
+      lang="en-AU"
+      className={`${fraunces.variable} ${jetbrainsMono.variable} ${kalam.variable}`}
+    >
       <body>
         {children}
         <Analytics />
