@@ -13,6 +13,12 @@
 // solution, platform, empower, revolutionise, cutting-edge, game-changing.
 // No dollar figure. No named payers beyond DVA / WorkCover / third parties.
 // The pilot clinic is never named - "our clinic" / "our practice" only.
+//
+// Vocabulary of clinic billing (use these): portal, log in, email, invoice,
+// claim, item code, referral, rejection. NEVER: form, submission workflow,
+// keying, rekeying, data entry, paperwork. If a practice manager wouldn't say
+// it, it doesn't go on the page. (The <form> element and the `form` config
+// object below are code identifiers, not rendered copy - those are fine.)
 // -----------------------------------------------------------------------------
 
 export const WORDMARK = "BiLLiE";
@@ -34,7 +40,7 @@ export const status = {
 
 export const hero = {
   headline: "Every claim. One portal.",
-  sub: "DVA wants a portal. WorkCover wants a form. Third parties want an email. Your clinic loses two to seven hours a week to it. BiLLiE does the lot.",
+  sub: "DVA has a portal. WorkCover has another one. Third parties want an email. Your clinic loses two to seven hours a week to it. BiLLiE does the lot.",
   ctaLabel: "Become a founding practice",
 };
 
@@ -46,7 +52,7 @@ export const problem = {
     },
     {
       heading: "It never ends",
-      body: "Every week the pile comes back. Same forms. Same logins. Same job. And none of it gets any faster.",
+      body: "Every week the pile comes back. Same portals. Same logins. Same job. And none of it gets any faster.",
     },
     {
       heading: "A rejection means doing it twice",
@@ -61,15 +67,18 @@ export const problem = {
 export const comparison = {
   heading: "Right now, versus with BiLLiE",
   leftLabel: "Right now",
+  // The final line is the point of the section: the rejection loop. The
+  // component styles the last item as a Clay beat.
   leftSteps: [
-    "Log in to the DVA portal.",
-    "Log out. Log in to WorkCover.",
+    "Log in to the DVA portal. Type it all in.",
+    "Log out. Log in to the WorkCover portal. Type it all in again.",
     "Dig through a folder for the right insurer's email address.",
     "Type the message. Attach the invoice. Send.",
     "Write it down somewhere so you remember you sent it.",
     "Wait.",
     "Check.",
     "Chase.",
+    "Rejected. Start again.",
   ],
   rightLabel: "With BiLLiE",
   rightSteps: [
@@ -88,7 +97,7 @@ export const manifesto = {
   heading: "Nobody ever fixed this. So we did.",
   body: [
     "Clinics have been doing claims by hand for as long as there have been claims. Not because anyone chose to. Because nobody ever built them anything better.",
-    "Portals that don't talk to each other. Forms that change without warning. An inbox full of insurers who each want it their own way.",
+    "Portals that don't talk to each other. Item codes that change without warning. An inbox full of insurers who each want it their own way.",
     "That was never your fault. It was just never anyone's job to fix it.",
     "Now it is.",
   ],
