@@ -12,11 +12,15 @@ export function Nav() {
           {WORDMARK}
         </a>
         <nav className="flex items-center gap-3 sm:gap-6">
-          <a
-            href={nav.cta.href}
-            className="inline-flex items-center justify-center rounded-full bg-ledger px-3 py-2 text-xs font-medium text-bone transition-colors hover:bg-ledger/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ledger sm:px-4 sm:text-sm"
-          >
-            {nav.cta.label}
+          <a href={nav.cta.href} className="btn btn--sm">
+            <span className="btn__mask">
+              <span className="btn__inner">
+                <span className="btn__label">{nav.cta.label}</span>
+                <span className="btn__label" aria-hidden="true">
+                  {nav.cta.label}
+                </span>
+              </span>
+            </span>
           </a>
         </nav>
       </div>

@@ -4,7 +4,7 @@ export function HowItWorks() {
   return (
     <section className="border-t border-mist/20 bg-bone">
       <div className="mx-auto w-full max-w-content px-5 py-16 sm:px-8 sm:py-24">
-        <h2 className="font-serif text-[28px] font-[400] leading-[1.15] text-ink md:text-[40px]">
+        <h2 className="font-serif text-[32px] font-[400] leading-[1.15] text-ink md:text-[48px]">
           {howItWorks.heading}
         </h2>
         <ol className="mt-10 grid gap-10 sm:grid-cols-3 sm:gap-8">
