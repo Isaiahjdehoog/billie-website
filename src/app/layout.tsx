@@ -20,7 +20,7 @@ const kalam = Kalam({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://billie-website.vercel.app"),
+  metadataBase: new URL("https://getbillie.com.au"),
   title: meta.title,
   description: meta.description,
   icons: {

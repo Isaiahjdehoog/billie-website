@@ -16,7 +16,13 @@ const config: Config = {
       },
       fontFamily: {
         // Body: Helvetica / Arial system stack
-        sans: ['"Helvetica Neue"', "Helvetica", "Arial", "sans-serif"],
+        sans: [
+          "-apple-system",
+          '"Helvetica Neue"',
+          "Helvetica",
+          "Arial",
+          "sans-serif",
+        ],
         // Headers: Jost (loaded via next/font), Futura substitute
         display: ["var(--font-jost)", '"Futura"', '"Century Gothic"', "sans-serif"],
         // Wordmark only: Kalam (loaded via next/font)
