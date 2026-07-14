@@ -18,7 +18,10 @@ function leadEmailText(lead: Lead): string {
   const value = (key: string): string => {
     if (key === "payers") return lead.payers.join(", ");
     if (key === "notes") return lead.notes?.trim() ? lead.notes.trim() : "-";
-    return String((lead as Record<string, unknown>)[key] ?? "-");
+    // Conditional fields (workcover_state, third_party_detail) are "" when their
+    // payer wasn't ticked - show a dash rather than a blank line.
+    const raw = (lead as Record<string, unknown>)[key];
+    return raw == null || raw === "" ? "-" : String(raw);
   };
 
   const lines = leadEmailLabels.map((f) => `${f.label}: ${value(f.key)}`);

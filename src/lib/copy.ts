@@ -2,11 +2,17 @@
 // SINGLE SOURCE OF TRUTH FOR EVERY USER-FACING STRING ON THE SITE.
 //
 // Rule: components contain NO copy string literals. They import from here.
-// Copy is FINAL (Phase B). Do not paraphrase or "improve" it - if something
-// reads wrong, flag it to Isaiah rather than editing.
 //
 // Wordmark is exactly "BiLLiE": capital B, lowercase i, capital L, capital L,
 // lowercase i, capital E. Never "Billie", never "BILLIE".
+//
+// Governing filters for every line (see the copy-pass brief):
+//   1. No "duh" lines - a line must make the reader ask "how?" not nod along.
+//   2. Grade 4-6 reading level - short words, short sentences, plain English.
+// Banned: "AI" (anywhere, incl. metadata), leverage, streamline, seamless,
+// solution, platform, empower, revolutionise, cutting-edge, game-changing.
+// No dollar figure. No named payers beyond DVA / WorkCover / third parties.
+// The pilot clinic is never named - "our clinic" / "our practice" only.
 // -----------------------------------------------------------------------------
 
 export const WORDMARK = "BiLLiE";
@@ -14,39 +20,77 @@ export const WORDMARK = "BiLLiE";
 export const meta = {
   title: "BiLLiE - Billing Managed",
   description:
-    "BiLLiE handles invoice submission for Australian allied health practices. DVA, WorkCover, Allianz, QBE and more - submitted, tracked, chased.",
+    "DVA, WorkCover, third-party insurers - every claim from one place. BiLLiE sends it, tracks it, and chases the reply. Built inside a working clinic.",
   ogAlt: "BiLLiE",
 };
 
 export const nav = {
-  login: { label: "Log in", href: "https://app.getbillie.com.au/login" },
   cta: { label: "Become a founding practice", href: "#apply" },
 };
 
 export const status = {
-  line: "In private beta - onboarding founding practices now",
+  line: "Private beta. Seven founding practices, then we close the list.",
 };
 
 export const hero = {
-  headline: "BiLLiE handles your billing. So you don't have to.",
-  sub: "Allied health practices lose ten to twenty hours a week to invoice submission. DVA, WorkCover, Allianz, QBE, ADF - every payer wants a different form, a different portal, a different inbox. BiLLiE does all of it, and chases the reply.",
+  headline: "Every claim. One portal.",
+  sub: "DVA wants a portal. WorkCover wants a form. Third parties want an email. Your clinic loses two to seven hours a week to it. BiLLiE does the lot.",
   ctaLabel: "Become a founding practice",
 };
 
 export const problem = {
   blocks: [
     {
-      heading: "Ten hours a week, gone",
-      body: "Every invoice keyed by hand, into a different system, by someone who should be doing something else. That time never comes back.",
+      heading: "The wrong person is doing it",
+      body: "Your practice manager should be running the practice. Not typing the same details into a different portal for the fifth time today.",
     },
     {
-      heading: "Slow to submit, slow to get paid",
-      body: "A claim sitting in the pile for a fortnight is a fortnight of cash your practice doesn't have.",
+      heading: "It never ends",
+      body: "Every week the pile comes back. Same forms. Same logins. Same job. And none of it gets any faster.",
     },
     {
-      heading: "Every rejection is the work, twice",
-      body: "Wrong item code. Missing referral. An address the payer changed six months ago and never told you. Back it comes.",
+      heading: "A rejection means doing it twice",
+      body: "One wrong code. One missing referral. Back it comes, and someone starts again from the top.",
     },
+  ],
+};
+
+// The comparison is the centrepiece: a long, cramped "Right now" column against
+// a two-line "With BiLLiE" column. The imbalance is the argument - do not
+// balance the two.
+export const comparison = {
+  heading: "Right now, versus with BiLLiE",
+  leftLabel: "Right now",
+  leftSteps: [
+    "Log in to the DVA portal.",
+    "Log out. Log in to WorkCover.",
+    "Dig through a folder for the right insurer's email address.",
+    "Type the message. Attach the invoice. Send.",
+    "Write it down somewhere so you remember you sent it.",
+    "Wait.",
+    "Check.",
+    "Chase.",
+  ],
+  rightLabel: "With BiLLiE",
+  rightSteps: [
+    "Drag the invoice in. Or email it to your clinic's BiLLiE address.",
+    "Done.",
+  ],
+  // The Bite (Change 3) replaces the brief's "BiLLiE does the rest..." line
+  // with this one. It is the emotional payoff of the page - centred, given room.
+  closingLine:
+    "Watch the invoices go out on their own. You won't want to go back.",
+};
+
+// The Bite (Change 2): a quiet manifesto beat between the comparison and How It
+// Works. No card, no icon - it needs silence around it to land.
+export const manifesto = {
+  heading: "Nobody ever fixed this. So we did.",
+  body: [
+    "Clinics have been doing claims by hand for as long as there have been claims. Not because anyone chose to. Because nobody ever built them anything better.",
+    "Portals that don't talk to each other. Forms that change without warning. An inbox full of insurers who each want it their own way.",
+    "That was never your fault. It was just never anyone's job to fix it.",
+    "Now it is.",
   ],
 };
 
@@ -54,46 +98,57 @@ export const howItWorks = {
   heading: "How it works",
   steps: [
     {
-      heading: "Send BiLLiE the invoice",
-      body: "Drop the PDF in. That's the whole job. No new software for your team to learn, no rekeying.",
+      heading: "Send it in",
+      body: "Drag the invoice in, or email it to your clinic's own BiLLiE address. That is your job done.",
     },
     {
       heading: "BiLLiE works out where it goes",
-      body: "Payer, item codes, amounts, claim details. BiLLiE reads the invoice and checks it against what that payer actually accepts - before it goes anywhere.",
+      body: "It reads the invoice, finds the payer, and checks it against what that payer actually accepts. Before it goes anywhere.",
     },
     {
-      heading: "BiLLiE submits it, and watches for the reply",
-      body: "Every submission logged. Every reply routed back to you. You see the status. You don't see the busywork.",
+      heading: "BiLLiE sends it and watches for the reply",
+      body: "Every claim logged. Every reply comes back to you. You see where things are at. You just don't do the work.",
     },
   ],
 };
 
 export const payers = {
-  list: "DVA. WorkCover QLD. Allianz. QBE. GIO. ADF. Private health funds. Third-party insurers.",
-  tagline: "One BiLLiE. Every payer.",
+  line1: "DVA. WorkCover. Third-party insurers.",
+  line2: "Every claim. One portal.",
 };
 
-export const credibility = {
-  heading: "Built inside a clinic, not a boardroom",
+// First person. This is Isaiah speaking - the trust section. It must not read
+// like marketing.
+export const origin = {
+  heading: "This wasn't built for clinics. It was built in one.",
   body: [
-    "BiLLiE exists because our own practice was losing whole days to billing. Not a hypothetical practice - ours. Every payer quirk BiLLiE handles is one we hit ourselves first, and every shortcut it takes is one we wanted.",
-    "It runs at our clinic today. Founding practices are next.",
+    "I didn't set out to build software. I set out to stop losing my Fridays.",
+    "Our clinic bills DVA, WorkCover, and a long tail of third parties. Every one of them wants something different. For years the answer was the same: someone sits down and does it.",
+    "BiLLiE is what happens when you stop accepting that. Every payer quirk it handles is one that bit us first. Every shortcut it takes is one we wished for.",
+    "It runs in our clinic today. Founding practices are next.",
+  ],
+  attribution: "Isaiah de Hoog, founder",
+  // Desktop-only pull quote. Dropped on mobile (it duplicates the first body
+  // line and there is no room for it). Two lines, rendered as a quote.
+  pullQuote: [
+    "I didn't set out to build software.",
+    "I set out to stop losing my Fridays.",
   ],
 };
 
 export const apply = {
   heading: "Become a founding practice",
   sub: [
-    "BiLLiE isn't open to everyone yet, and we're onboarding a small number of practices at a time. Founding practices get founding pricing, locked in, and first access when we open.",
-    "And you won't have to go looking for us. Tell us about your practice, and we'll come to you.",
+    "BiLLiE isn't open to everyone yet. We're taking on seven founding practices - no more. They get founding pricing, locked in, and first access when we open.",
+    "You won't have to come looking for us. Tell us about your clinic, and we'll come to you.",
   ],
 };
 
 export const success = {
   heading: "You're on the founding list.",
   body: [
-    "BiLLiE isn't generally available yet - we're onboarding a small number of practices at a time, and yours is now in front of us.",
-    "Isaiah will be in touch personally, usually within a couple of days, to hear how your practice bills today and work out whether BiLLiE's a fit. Nothing for you to do in the meantime.",
+    "BiLLiE isn't open yet. We're taking on seven founding practices, and yours is now in front of me.",
+    "I'll be in touch personally, usually within a couple of days, to hear how your clinic bills today. Nothing for you to do in the meantime.",
   ],
 };
 
@@ -127,11 +182,13 @@ isaiah@getbillie.com.au`,
 export const footer = {
   // NOTE: line 2 is deliberate and load-bearing (aligns with the AWS SES
   // production-access use-case writeup). Do not shorten, move, or merge it.
+  // Line 4 must render the real copyright glyph U+00A9, not the ASCII fallback.
+  // "Vilosoft" is a sole trader - never add "Pty Ltd".
   lines: [
     "BiLLiE is operated by Vilosoft, Australia. Clinic and claim data is hosted in Australia (AWS ap-southeast-2) and used only to operate BiLLiE.",
     "BiLLiE sends individual, claim-specific correspondence to payers on your clinic's behalf. Never bulk email. Never marketing email.",
     "Contact info@getbillie.com.au",
-    "(c) 2026 Vilosoft",
+    "© 2026 Vilosoft",
   ],
   contactEmail: "info@getbillie.com.au",
 };
@@ -143,8 +200,8 @@ export const footer = {
 
 export const roleOptions = [
   "Practice manager",
-  "Principal clinician",
   "Practice owner",
+  "Clinician",
   "Admin",
   "Other",
 ] as const;
@@ -160,33 +217,15 @@ export const stateOptions = [
   "ACT",
 ] as const;
 
-export const disciplineOptions = [
-  "Physiotherapy",
-  "Occupational therapy",
-  "Hand therapy",
-  "Podiatry",
-  "Psychology",
-  "Exercise physiology",
-  "Other",
-] as const;
+// Three payers only. Ticking WorkCover / Third-party insurers reveals a
+// required conditional field (state / free text) handled in the form + schema.
+export const payerOptions = ["DVA", "WorkCover", "Third-party insurers"] as const;
 
-export const payerOptions = [
-  "DVA",
-  "WorkCover QLD",
-  "Other state WorkCover",
-  "Allianz",
-  "QBE",
-  "Other third-party insurers",
-  "ADF",
-  "Private health funds",
-  "Medicare",
-] as const;
-
-export const billingHoursOptions = [
-  "Under 5",
-  "5-10",
-  "10-20",
-  "20+",
+export const invoiceVolumeOptions = [
+  "Under 20",
+  "20-50",
+  "50-100",
+  "100+",
 ] as const;
 
 export const form = {
@@ -201,15 +240,14 @@ export const form = {
     email: { label: "Email", autoComplete: "email" },
     phone: { label: "Phone", autoComplete: "tel" },
     state: { label: "State", options: stateOptions },
-    discipline: { label: "Discipline", options: disciplineOptions },
-    payers: {
-      label: "Which payers does your practice handle?",
-      options: payerOptions,
-    },
-    billing_hours: {
-      label:
-        "Roughly how many hours a week does your practice spend on billing?",
-      options: billingHoursOptions,
+    payers: { label: "Which payers do you bill?", options: payerOptions },
+    // Conditional reveal, shown only when "WorkCover" is ticked.
+    workcover_state: { label: "Which state?", options: stateOptions },
+    // Conditional reveal, shown only when "Third-party insurers" is ticked.
+    third_party_detail: { label: "Which ones?" },
+    invoice_volume: {
+      label: "Roughly how many invoices do you send each week?",
+      options: invoiceVolumeOptions,
     },
     notes: { label: "Anything else we should know?", optional: "Optional" },
   },
@@ -231,8 +269,9 @@ export const leadEmailLabels: { key: string; label: string }[] = [
   { key: "email", label: "Email" },
   { key: "phone", label: "Phone" },
   { key: "state", label: "State" },
-  { key: "discipline", label: "Discipline" },
   { key: "payers", label: "Payers" },
-  { key: "billing_hours", label: "Billing hours per week" },
+  { key: "workcover_state", label: "WorkCover state" },
+  { key: "third_party_detail", label: "Third-party insurers" },
+  { key: "invoice_volume", label: "Invoice volume" },
   { key: "notes", label: "Notes" },
 ];

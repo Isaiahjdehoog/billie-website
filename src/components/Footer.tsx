@@ -6,7 +6,7 @@ export function Footer() {
   return (
     <footer className="border-t border-mist/20 bg-bone">
       <div className="mx-auto w-full max-w-content px-5 py-12 sm:px-8">
-        <div className="max-w-3xl space-y-3 text-sm leading-relaxed text-mist">
+        <div className="max-w-prose space-y-3 text-sm leading-relaxed text-mist">
           {footer.lines.map((line) =>
             line.includes(footer.contactEmail) ? (
               <p key={line}>

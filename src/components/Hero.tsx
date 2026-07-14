@@ -14,7 +14,7 @@ export function Hero() {
           <div className="mt-8">
             <a
               href="#apply"
-              className="inline-flex items-center justify-center rounded-full bg-ledger px-7 py-3.5 font-display text-base font-semibold text-bone transition-colors hover:bg-[#14492e] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ledger"
+              className="inline-flex items-center justify-center rounded-full bg-ledger px-7 py-3.5 font-display text-base font-semibold text-bone transition-colors hover:bg-ledger/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ledger"
             >
               {hero.ctaLabel}
             </a>

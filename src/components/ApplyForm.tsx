@@ -15,9 +15,10 @@ type Values = {
   email: string;
   phone: string;
   state: string;
-  discipline: string;
   payers: string[];
-  billing_hours: string;
+  workcover_state: string;
+  third_party_detail: string;
+  invoice_volume: string;
   notes: string;
 };
 
@@ -28,9 +29,10 @@ const INITIAL: Values = {
   email: "",
   phone: "",
   state: "",
-  discipline: "",
   payers: [],
-  billing_hours: "",
+  workcover_state: "",
+  third_party_detail: "",
+  invoice_volume: "",
   notes: "",
 };
 
@@ -54,7 +56,7 @@ function FieldShell({
     <div>
       <label
         htmlFor={htmlFor}
-        className="block font-display text-sm font-medium text-ink"
+        className="block text-sm font-medium text-ink"
       >
         {label}
         {optional ? (
@@ -82,13 +84,19 @@ export function ApplyForm() {
     setValues((prev) => ({ ...prev, [key]: value }));
   }
 
+  // Toggling a payer also clears its conditional field when unticked, so a
+  // hidden field never carries a stale value and never blocks submit.
   function togglePayer(option: string) {
-    setValues((prev) => ({
-      ...prev,
-      payers: prev.payers.includes(option)
+    setValues((prev) => {
+      const has = prev.payers.includes(option);
+      const payers = has
         ? prev.payers.filter((p) => p !== option)
-        : [...prev.payers, option],
-    }));
+        : [...prev.payers, option];
+      const next: Values = { ...prev, payers };
+      if (option === "WorkCover" && has) next.workcover_state = "";
+      if (option === "Third-party insurers" && has) next.third_party_detail = "";
+      return next;
+    });
   }
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -129,8 +137,7 @@ export function ApplyForm() {
     }
   }
 
-  const firstError = (key: keyof Values): string | undefined =>
-    errors[key]?.[0];
+  const firstError = (key: keyof Values): string | undefined => errors[key]?.[0];
 
   if (submitted) {
     return (
@@ -158,6 +165,9 @@ export function ApplyForm() {
   }
 
   const genericError = status === "error" && Object.keys(errors).length === 0;
+
+  const showWorkcoverState = values.payers.includes("WorkCover");
+  const showThirdPartyDetail = values.payers.includes("Third-party insurers");
 
   return (
     <section id="apply" className="border-t border-mist/20 bg-bone scroll-mt-20">
@@ -277,94 +287,123 @@ export function ApplyForm() {
             </FieldShell>
           </div>
 
-          <div className="grid gap-5 sm:grid-cols-2">
-            <FieldShell
-              htmlFor="state"
-              label={f.state.label}
-              error={firstError("state")}
+          <FieldShell
+            htmlFor="state"
+            label={f.state.label}
+            error={firstError("state")}
+          >
+            <select
+              id="state"
+              name="state"
+              className={inputClass}
+              value={values.state}
+              onChange={(e) => update("state", e.target.value)}
+              aria-invalid={Boolean(firstError("state"))}
             >
-              <select
-                id="state"
-                name="state"
-                className={inputClass}
-                value={values.state}
-                onChange={(e) => update("state", e.target.value)}
-                aria-invalid={Boolean(firstError("state"))}
-              >
-                <option value="" disabled>
-                  {form.selectPlaceholder}
+              <option value="" disabled>
+                {form.selectPlaceholder}
+              </option>
+              {f.state.options.map((option) => (
+                <option key={option} value={option}>
+                  {option}
                 </option>
-                {f.state.options.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
-            </FieldShell>
-
-            <FieldShell
-              htmlFor="discipline"
-              label={f.discipline.label}
-              error={firstError("discipline")}
-            >
-              <select
-                id="discipline"
-                name="discipline"
-                className={inputClass}
-                value={values.discipline}
-                onChange={(e) => update("discipline", e.target.value)}
-                aria-invalid={Boolean(firstError("discipline"))}
-              >
-                <option value="" disabled>
-                  {form.selectPlaceholder}
-                </option>
-                {f.discipline.options.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
-            </FieldShell>
-          </div>
+              ))}
+            </select>
+          </FieldShell>
 
           <FieldShell label={f.payers.label} error={firstError("payers")}>
-            <div className="grid gap-2 sm:grid-cols-2">
+            <div className="space-y-2">
               {f.payers.options.map((option) => (
-                <label
-                  key={option}
-                  className="flex cursor-pointer items-center gap-2.5 rounded-lg border border-mist/40 bg-paper px-3 py-2.5 text-sm text-ink hover:border-ledger/50"
-                >
-                  <input
-                    type="checkbox"
-                    name="payers"
-                    value={option}
-                    checked={values.payers.includes(option)}
-                    onChange={() => togglePayer(option)}
-                    className="h-4 w-4 shrink-0 accent-ledger"
-                  />
-                  <span>{option}</span>
-                </label>
+                <div key={option}>
+                  <label className="flex cursor-pointer items-center gap-2.5 rounded-lg border border-mist/40 bg-paper px-3 py-2.5 text-sm text-ink hover:border-ledger/50">
+                    <input
+                      type="checkbox"
+                      name="payers"
+                      value={option}
+                      checked={values.payers.includes(option)}
+                      onChange={() => togglePayer(option)}
+                      className="h-4 w-4 shrink-0 accent-ledger"
+                    />
+                    <span>{option}</span>
+                  </label>
+
+                  {option === "WorkCover" && showWorkcoverState ? (
+                    <div className="ml-1 mt-2.5 border-l-2 border-ledger/30 pl-4">
+                      <FieldShell
+                        htmlFor="workcover_state"
+                        label={f.workcover_state.label}
+                        error={firstError("workcover_state")}
+                      >
+                        <select
+                          id="workcover_state"
+                          name="workcover_state"
+                          className={inputClass}
+                          value={values.workcover_state}
+                          onChange={(e) =>
+                            update("workcover_state", e.target.value)
+                          }
+                          aria-invalid={Boolean(firstError("workcover_state"))}
+                        >
+                          <option value="" disabled>
+                            {form.selectPlaceholder}
+                          </option>
+                          {f.workcover_state.options.map((state) => (
+                            <option key={state} value={state}>
+                              {state}
+                            </option>
+                          ))}
+                        </select>
+                      </FieldShell>
+                    </div>
+                  ) : null}
+
+                  {option === "Third-party insurers" && showThirdPartyDetail ? (
+                    <div className="ml-1 mt-2.5 border-l-2 border-ledger/30 pl-4">
+                      <FieldShell
+                        htmlFor="third_party_detail"
+                        label={f.third_party_detail.label}
+                        error={firstError("third_party_detail")}
+                      >
+                        <input
+                          id="third_party_detail"
+                          name="third_party_detail"
+                          type="text"
+                          maxLength={200}
+                          autoComplete="off"
+                          className={inputClass}
+                          value={values.third_party_detail}
+                          onChange={(e) =>
+                            update("third_party_detail", e.target.value)
+                          }
+                          aria-invalid={Boolean(
+                            firstError("third_party_detail"),
+                          )}
+                        />
+                      </FieldShell>
+                    </div>
+                  ) : null}
+                </div>
               ))}
             </div>
           </FieldShell>
 
           <FieldShell
-            htmlFor="billing_hours"
-            label={f.billing_hours.label}
-            error={firstError("billing_hours")}
+            htmlFor="invoice_volume"
+            label={f.invoice_volume.label}
+            error={firstError("invoice_volume")}
           >
             <select
-              id="billing_hours"
-              name="billing_hours"
+              id="invoice_volume"
+              name="invoice_volume"
               className={inputClass}
-              value={values.billing_hours}
-              onChange={(e) => update("billing_hours", e.target.value)}
-              aria-invalid={Boolean(firstError("billing_hours"))}
+              value={values.invoice_volume}
+              onChange={(e) => update("invoice_volume", e.target.value)}
+              aria-invalid={Boolean(firstError("invoice_volume"))}
             >
               <option value="" disabled>
                 {form.selectPlaceholder}
               </option>
-              {f.billing_hours.options.map((option) => (
+              {f.invoice_volume.options.map((option) => (
                 <option key={option} value={option}>
                   {option}
                 </option>
@@ -382,6 +421,7 @@ export function ApplyForm() {
               id="notes"
               name="notes"
               rows={4}
+              maxLength={1000}
               className={`${inputClass} resize-y`}
               value={values.notes}
               onChange={(e) => update("notes", e.target.value)}
@@ -398,7 +438,7 @@ export function ApplyForm() {
           <button
             type="submit"
             disabled={status === "submitting"}
-            className="inline-flex w-full items-center justify-center rounded-full bg-ledger px-7 py-3.5 font-display text-base font-semibold text-bone transition-colors hover:bg-[#14492e] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ledger disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto"
+            className="inline-flex w-full items-center justify-center rounded-full bg-ledger px-7 py-3.5 font-display text-base font-semibold text-bone transition-colors hover:bg-ledger/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ledger disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto"
           >
             {status === "submitting" ? form.submittingLabel : form.submitLabel}
           </button>
