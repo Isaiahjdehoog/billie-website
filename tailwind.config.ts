@@ -15,11 +15,12 @@ const config: Config = {
         mist: "#A8A29E", // muted text, hairlines
       },
       fontFamily: {
-        // Body AND every numeral: Helvetica / Arial system stack. No webfont.
+        // Body / UI / numerals: Jost (loaded via next/font), degrading to a
+        // geometric-ish system face, then a neutral one.
         sans: [
-          "-apple-system",
+          "var(--font-jost)",
+          '"Century Gothic"',
           '"Helvetica Neue"',
-          "Helvetica",
           "Arial",
           "sans-serif",
         ],

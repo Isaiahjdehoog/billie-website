@@ -12,8 +12,8 @@
     @apply bg-bone text-ink font-sans antialiased;
   }
 
-  /* Headings default to the body face (Helvetica). The serif (Cormorant) is
-     opt-in via font-serif, only on h1 / section h2 / closing line / pull quote. */
+  /* Headings default to the body face (Jost). The serif (Cormorant) is opt-in
+     via font-serif, only on h1 / section h2 / closing line / pull quote. */
   h1,
   h2,
   h3 {
@@ -37,17 +37,17 @@
     line-height: 1.2;
   }
 
-  /* Digits render in Helvetica, never the serif face. Applied to prose digits
-     (footer year, ap-southeast-2) as a guard. */
+  /* Digits render in the sans face (Jost), never the serif. Applied to prose
+     digits (footer year, ap-southeast-2) as a guard. */
   .num {
-    font-family: -apple-system, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    @apply font-sans;
   }
 
   /* CTA text-roll: label rendered twice inside a one-line mask; on hover the
      stack translates up exactly one line-height so the copy rolls over, while
      the background moves Ledger -> Clay in the same 260ms motion. Mask height,
      label height and the hover translate MUST all stay 1.25em or the label
-     lands half-cut. Label font is Helvetica 500 (inherited body face). */
+     lands half-cut. Label font is the body face (Jost) 500. */
   .btn {
     position: relative;
     display: inline-flex;
