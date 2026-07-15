@@ -119,10 +119,11 @@ export const howItWorks = {
 };
 
 export const payers = {
-  // The emotional payoff on the green band (the payer list was dropped). Big,
-  // white/bone, with line two in Clay - both lines the same size.
+  // The emotional payoff on the green band (the payer list was dropped). Both
+  // lines cream/bone; the bottom stands out via a heavier weight + bigger size
+  // (the two lines are size-matched so their left/right edges line up).
   payoff: {
-    line1: "Watching the invoices go out on their own.",
+    line1: "Watching invoices go out on their own.",
     line2: "You won't go back.",
   },
 };
