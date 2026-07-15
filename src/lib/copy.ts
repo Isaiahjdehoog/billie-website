@@ -85,12 +85,15 @@ export const comparison = {
     "Drag the invoice in. Or email it to your clinic's BiLLiE address.",
     "Done.",
   ],
-  // The Bite (Change 3) replaces the brief's "BiLLiE does the rest..." line
-  // with this one. It is the emotional payoff of the page - centred, given room.
-  closingLine: [
-    "Watch the invoices go out on their own.",
-    "You won't want to go back.",
-  ],
+  // The emotional payoff. Rendered as a HELVETICA bold statement (the one line
+  // that leaves the serif system on purpose), with "go back" accented in Clay
+  // and the trailing full stop kept Ink. lead + " " + accent + tail reads as one
+  // continuous sentence for screen readers.
+  closingLine: {
+    lead: "Watch the invoices go out on their own. You won't want to",
+    accent: "go back",
+    tail: ".",
+  },
 };
 
 // The Bite (Change 2): a quiet manifesto beat between the comparison and How It
