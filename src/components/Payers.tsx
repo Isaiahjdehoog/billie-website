@@ -11,7 +11,7 @@ export function Payers() {
           <span className="block text-[19px] font-normal md:text-[38px]">
             {payers.payoff.line1}
           </span>
-          <span className="block text-[35px] font-bold md:text-[71px]">
+          <span className="block text-[36px] font-bold md:text-[72px]">
             {payers.payoff.line2}
           </span>
         </p>

@@ -123,8 +123,8 @@ export const payers = {
   // lines cream/bone; the bottom stands out via a heavier weight + bigger size
   // (the two lines are size-matched so their left/right edges line up).
   payoff: {
-    line1: "Watching invoices go out on their own.",
-    line2: "You won't go back.",
+    line1: "Watching invoices go out on their own",
+    line2: "You won't go back",
   },
 };
 
