@@ -1,9 +1,9 @@
 import { Fragment } from "react";
 import { footer } from "@/lib/copy";
 
-// Digit runs render in Helvetica via .num. The footer is already Helvetica, so
-// this is a guard, not a visual change - it keeps the "© 2026" year and the
-// "ap-southeast-2" region out of any serif context for good.
+// Digit runs render in the sans face (Jost) via .num. The footer is already
+// sans, so this is a guard, not a visual change - it keeps the "© 2026" year and
+// the "ap-southeast-2" region out of any serif context for good.
 function withNumerals(text: string) {
   return text.split(/(\d[\d-]*)/).map((part, i) =>
     /^\d/.test(part) ? (

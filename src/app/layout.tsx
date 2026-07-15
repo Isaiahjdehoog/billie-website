@@ -1,10 +1,16 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, JetBrains_Mono, Kalam } from "next/font/google";
+import { Cormorant_Garamond, Jost, JetBrains_Mono, Kalam } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { meta } from "@/lib/copy";
 import "./globals.css";
 
-// Body (Helvetica) is a system stack - no webfont. Three faces download.
+// Body / UI / numerals: Jost (the geometric-sans workhorse under the serif).
+const jost = Jost({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  variable: "--font-jost",
+  display: "swap",
+});
 
 // Serif headlines only. Weight 400 at every size - lighter weights go weedy at
 // headline size and break up on a phone, so 400 is used throughout (no step).
@@ -62,7 +68,7 @@ export default function RootLayout({
   return (
     <html
       lang="en-AU"
-      className={`${cormorant.variable} ${jetbrainsMono.variable} ${kalam.variable}`}
+      className={`${jost.variable} ${cormorant.variable} ${jetbrainsMono.variable} ${kalam.variable}`}
     >
       <body>
         {children}
