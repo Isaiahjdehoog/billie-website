@@ -85,14 +85,11 @@ export const comparison = {
     "Drag the invoice in. Or email it to your clinic's BiLLiE address.",
     "Done.",
   ],
-  // The emotional payoff. Rendered as a HELVETICA bold statement (the one line
-  // that leaves the serif system on purpose), with "go back" accented in Clay
-  // and the trailing full stop kept Ink. lead + " " + accent + tail reads as one
-  // continuous sentence for screen readers.
+  // The emotional payoff. HELVETICA bold statement (leaves the serif system on
+  // purpose), on two lines: line one Ink, line two Clay.
   closingLine: {
-    lead: "Watch the invoices go out on their own. You won't want to",
-    accent: "go back",
-    tail: ".",
+    line1: "Watching the invoices go out on their own.",
+    line2: "You won't go back.",
   },
 };
 
