@@ -63,11 +63,12 @@ export function Comparison() {
           </div>
         </div>
 
-        {/* The payoff (The Bite, Change 3) - centred, larger than body, room. */}
-        <p className="mx-auto mt-12 max-w-2xl text-center font-serif text-[32px] font-[400] leading-[1.12] text-ink [text-wrap:balance] sm:mt-16 md:text-[48px]">
-          {comparison.closingLine[0]}
-          <br />
-          {comparison.closingLine[1]}
+        {/* The payoff - a Helvetica bold statement (leaves the serif system on
+            purpose), one line on desktop, "go back" accented in Clay. */}
+        <p className="mx-auto mt-12 text-center text-[20px] font-bold leading-snug text-ink sm:mt-16 md:text-[28px] lg:whitespace-nowrap">
+          {comparison.closingLine.lead}{" "}
+          <span className="text-clay">{comparison.closingLine.accent}</span>
+          {comparison.closingLine.tail}
         </p>
       </div>
     </section>
