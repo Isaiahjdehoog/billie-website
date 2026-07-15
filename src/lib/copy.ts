@@ -85,12 +85,6 @@ export const comparison = {
     "Drag the invoice in. Or email it to your clinic's BiLLiE address.",
     "Done.",
   ],
-  // The emotional payoff. HELVETICA bold statement (leaves the serif system on
-  // purpose), on two lines: line one Ink, line two Clay.
-  closingLine: {
-    line1: "Watching the invoices go out on their own.",
-    line2: "You won't go back.",
-  },
 };
 
 // The Bite (Change 2): a quiet manifesto beat between the comparison and How It
@@ -125,8 +119,14 @@ export const howItWorks = {
 };
 
 export const payers = {
-  line1: "DVA. WorkCover. Third-party insurers.",
-  line2: "Every claim. One portal.",
+  list: "DVA. WorkCover. Third-party insurers.",
+  // The emotional payoff, moved here from the comparison ("Every claim. One
+  // portal." lives in the hero already). Rendered white/bone, with line two in
+  // Clay, on the green band.
+  payoff: {
+    line1: "Watching the invoices go out on their own.",
+    line2: "You won't go back.",
+  },
 };
 
 // First person. This is Isaiah speaking - the trust section. It must not read
