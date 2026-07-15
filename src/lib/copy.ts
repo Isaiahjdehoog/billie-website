@@ -119,10 +119,8 @@ export const howItWorks = {
 };
 
 export const payers = {
-  list: "DVA. WorkCover. Third-party insurers.",
-  // The emotional payoff, moved here from the comparison ("Every claim. One
-  // portal." lives in the hero already). Rendered white/bone, with line two in
-  // Clay, on the green band.
+  // The emotional payoff on the green band (the payer list was dropped). Big,
+  // white/bone, with line two in Clay - both lines the same size.
   payoff: {
     line1: "Watching the invoices go out on their own.",
     line2: "You won't go back.",
