@@ -64,11 +64,10 @@ export function Comparison() {
         </div>
 
         {/* The payoff - a Helvetica bold statement (leaves the serif system on
-            purpose), one line on desktop, "go back" accented in Clay. */}
-        <p className="mx-auto mt-12 text-center text-[20px] font-bold leading-snug text-ink sm:mt-16 md:text-[28px] lg:whitespace-nowrap">
-          {comparison.closingLine.lead}{" "}
-          <span className="text-clay">{comparison.closingLine.accent}</span>
-          {comparison.closingLine.tail}
+            purpose), on two lines: line one Ink, line two Clay. */}
+        <p className="mx-auto mt-12 text-center text-[20px] font-bold leading-snug text-ink sm:mt-16 md:text-[28px]">
+          <span className="block">{comparison.closingLine.line1}</span>
+          <span className="block text-clay">{comparison.closingLine.line2}</span>
         </p>
       </div>
     </section>
