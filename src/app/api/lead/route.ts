@@ -1,18 +1,54 @@
 import { NextResponse } from "next/server";
-import { Resend } from "resend";
+import { SESv2Client, SendEmailCommand } from "@aws-sdk/client-sesv2";
+import { awsCredentialsProvider } from "@vercel/oidc-aws-credentials-provider";
 import { autoReply, leadEmailLabels } from "@/lib/copy";
 import { HONEYPOT_FIELD, leadSchema, type Lead } from "@/lib/lead-schema";
 
-// Sydney. preferredRegion applies to the Edge runtime; vercel.json pins the
-// default function region to syd1 as well.
-export const runtime = "edge";
+// Node runtime (the AWS SDK is not built for Edge). vercel.json pins the
+// function region to syd1 (Sydney), next to SES ap-southeast-2.
+export const runtime = "nodejs";
 export const preferredRegion = "syd1";
 
-// Both addresses are real inboxes on the verified getbillie.com.au domain.
+// Both addresses are on getbillie.com.au, a verified SES domain identity in
+// ap-southeast-2. The IAM role only allows these two From addresses.
 const LEAD_INBOX = "info@getbillie.com.au";
 const LEAD_FROM = "BiLLiE <info@getbillie.com.au>";
 const AUTOREPLY_FROM = "Isaiah de Hoog <isaiah@getbillie.com.au>";
 const AUTOREPLY_REPLY_TO = "isaiah@getbillie.com.au";
+
+const SES_REGION = "ap-southeast-2";
+
+// Auth is Vercel OIDC: the function swaps its Vercel token for short-lived AWS
+// credentials on the role in AWS_ROLE_ARN. No long-lived keys anywhere.
+let ses: SESv2Client | undefined;
+function sesClient(roleArn: string): SESv2Client {
+  if (!ses) {
+    ses = new SESv2Client({
+      region: SES_REGION,
+      credentials: awsCredentialsProvider({ roleArn }),
+    });
+  }
+  return ses;
+}
+
+async function sendText(
+  client: SESv2Client,
+  email: { from: string; to: string; replyTo: string; subject: string; text: string },
+): Promise<void> {
+  await client.send(
+    new SendEmailCommand({
+      FromEmailAddress: email.from,
+      Destination: { ToAddresses: [email.to] },
+      ReplyToAddresses: [email.replyTo],
+      Content: {
+        Simple: {
+          Subject: { Data: email.subject, Charset: "UTF-8" },
+          Body: { Text: { Data: email.text, Charset: "UTF-8" } },
+        },
+      },
+    }),
+  );
+}
 
 function leadEmailText(lead: Lead): string {
   const value = (key: string): string => {
@@ -55,25 +91,25 @@ export async function POST(request: Request) {
   }
   const lead = parsed.data;
 
-  const apiKey = process.env.RESEND_API_KEY;
-  if (!apiKey) {
-    console.error("RESEND_API_KEY is not set");
+  const roleArn = process.env.AWS_ROLE_ARN;
+  if (!roleArn) {
+    console.error("AWS_ROLE_ARN is not set");
     return NextResponse.json({ ok: false }, { status: 500 });
   }
-  const resend = new Resend(apiKey);
+  const client = sesClient(roleArn);
 
   // Email 1 - the lead notification. This is the one that matters. If it fails,
   // the whole request fails so the practice knows to retry.
-  const { error: leadError } = await resend.emails.send({
-    from: LEAD_FROM,
-    to: LEAD_INBOX,
-    replyTo: lead.email,
-    subject: `New BiLLiE lead - ${lead.practice}`,
-    text: leadEmailText(lead),
-  });
-
-  if (leadError) {
-    console.error("Lead notification email failed", leadError);
+  try {
+    await sendText(client, {
+      from: LEAD_FROM,
+      to: LEAD_INBOX,
+      replyTo: lead.email,
+      subject: `New BiLLiE lead - ${lead.practice}`,
+      text: leadEmailText(lead),
+    });
+  } catch (err) {
+    console.error("Lead notification email failed", errorName(err));
     return NextResponse.json({ ok: false }, { status: 500 });
   }
 
@@ -81,7 +117,7 @@ export async function POST(request: Request) {
   // in his inbox (replyTo isaiah@). A failure here must NOT fail the request: we
   // already captured the lead. Log and move on.
   try {
-    const { error: replyError } = await resend.emails.send({
+    await sendText(client, {
       from: AUTOREPLY_FROM,
       to: lead.email,
       replyTo: AUTOREPLY_REPLY_TO,
@@ -90,12 +126,16 @@ export async function POST(request: Request) {
         .replaceAll("{name}", lead.name)
         .replaceAll("{practice}", lead.practice),
     });
-    if (replyError) {
-      console.error("Auto-reply email failed (lead still captured)", replyError);
-    }
   } catch (err) {
-    console.error("Auto-reply email threw (lead still captured)", err);
+    console.error("Auto-reply email failed (lead still captured)", errorName(err));
   }
 
   return NextResponse.json({ ok: true }, { status: 200 });
+}
+
+// Log the error's name and message only. SES errors can quote the recipient
+// address back, so the full object is never logged.
+function errorName(err: unknown): string {
+  if (err instanceof Error) return `${err.name}: ${err.message.replace(/\S+@\S+/g, "<email>")}`;
+  return "unknown error";
 }

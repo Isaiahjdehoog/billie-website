@@ -1,6 +1,9 @@
 # BiLLiE website - build brief
 
-This is the brief this repo was built from, archived for reference. Phase A
+This is the brief this repo was built from, archived for reference. It is
+history, not the current spec. Since 2026.09.27 the form sends through AWS SES
+(Sydney), not the provider named at build time, and the site has a /privacy
+page. See README.md and docs/EMAIL-GUIDE.md for how it works now. Phase A
 (scaffold + form + email) and Phase B (final copy) were collapsed into a single
 build.
 
@@ -26,7 +29,7 @@ build.
 - Next.js 15, App Router, TypeScript strict
 - Tailwind v3
 - One route handler: `/api/lead`
-- Resend for outbound email
+- Outbound email (now AWS SES ap-southeast-2)
 - No Supabase, no auth, no database, no CMS, no shared packages
 - Vercel, function region `syd1` (Sydney)
 - `@vercel/analytics` (cookieless). No GA, no pixels, no cookie banner.
@@ -80,7 +83,7 @@ Success state replaces the form in place with a confirmation panel.
 
 ## `/api/lead` route handler
 
-On valid POST, send TWO emails via Resend:
+On valid POST, send TWO emails (now via AWS SES):
 
 **Email 1 - lead notification** (the one that matters)
 
@@ -98,12 +101,12 @@ On valid POST, send TWO emails via Resend:
 
 Email 2 failing must NOT fail the request (separate try/catch). 200 on success,
 400 with field errors on validation failure. Never echo submitted PII in an
-error response. The Resend domain is verified domain-wide, so no new DNS.
+error response. The sending domain is verified domain-wide, so no new DNS.
 
 ## Env
 
-`RESEND_API_KEY` - a new key scoped to this project. `.env.example` committed
-with a placeholder; real key never committed.
+Originally one API key for the email provider. Now `AWS_ROLE_ARN` only (Vercel
+OIDC, no keys) - see README.md.
 
 ## CI
 

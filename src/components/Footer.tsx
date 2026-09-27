@@ -38,6 +38,14 @@ export function Footer() {
               <p key={line}>{withNumerals(line)}</p>
             ),
           )}
+          <p>
+            <a
+              href={footer.privacyLink.href}
+              className="text-ink underline decoration-mist/50 underline-offset-2 hover:text-ledger"
+            >
+              {footer.privacyLink.label}
+            </a>
+          </p>
         </div>
       </div>
     </footer>

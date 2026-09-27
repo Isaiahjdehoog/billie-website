@@ -31,7 +31,9 @@ export const meta = {
 };
 
 export const nav = {
-  cta: { label: "Become a founding practice", href: "#apply" },
+  // Root-relative so the links still work from /privacy.
+  home: "/#top",
+  cta: { label: "Become a founding practice", href: "/#apply" },
 };
 
 export const status = {
@@ -203,6 +205,7 @@ export const footer = {
     "© 2026 Vilosoft",
   ],
   contactEmail: "info@getbillie.com.au",
+  privacyLink: { label: "Privacy Policy", href: "/privacy" },
 };
 
 // -----------------------------------------------------------------------------
@@ -244,6 +247,12 @@ export const form = {
   heading: apply.heading,
   submitLabel: "Become a founding practice",
   submittingLabel: "Sending...",
+  // Collection notice (APP 5), shown under the submit button.
+  notice: {
+    text: "We use these details only to contact you about BiLLiE.",
+    linkLabel: "Privacy Policy",
+    href: "/privacy",
+  },
   selectPlaceholder: "Select...",
   fields: {
     name: { label: "Your name", autoComplete: "name" },
