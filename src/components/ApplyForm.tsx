@@ -452,6 +452,16 @@ export function ApplyForm() {
               </span>
             </span>
           </button>
+
+          <p className="text-sm text-ink/60">
+            {form.notice.text}{" "}
+            <a
+              href={form.notice.href}
+              className="text-ink underline decoration-mist/50 underline-offset-2 hover:text-ledger"
+            >
+              {form.notice.linkLabel}
+            </a>
+          </p>
         </form>
       </div>
     </section>
