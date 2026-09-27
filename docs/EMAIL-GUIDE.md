@@ -3,7 +3,7 @@
 Every email BiLLiE sends.
 For each one: what sends it, where the words live, how to change them.
 
-Last checked: 2026.09.27.
+Last checked: 2026.09.27. App side and Part 5 corrected by the Head of Development the same day (DEC-258).
 
 ---
 
@@ -108,6 +108,8 @@ Where the words live:
 A copy of the sign-in code email is kept in the billie repo,
 at `docs/email/auth-code.supabase.html`.
 The top of that file explains how to copy it into Supabase.
+The Reset Password email has **no repo copy yet** (DEC-186).
+Until it has one, Supabase is the only place its words live.
 
 ### How to change a sign-in email
 
@@ -197,16 +199,18 @@ If you do it yourself:
 
 ### Website emails
 
+The website's AWS role only lets **Production** send (DEC-258).
+A preview link shows the form, but pressing send there fails. That is expected.
+
 1. Make your change on a new branch, never on `main`.
-2. Push the branch and open a pull request.
-3. Vercel builds a **preview** link for it.
-   The link shows on the pull request.
-4. Open the preview link and fill in the form.
+2. Open a pull request and read the wording change in it.
+3. Merge to `main`. That puts it on the live site.
+4. On the live site, fill in the form.
    - Put **TEST** in the practice name.
    - Use **info@getbillie.com.au** as the email,
      so both emails come to you and no real person gets one.
 5. Check both emails arrived at info@ and read right.
-6. Only then merge to `main`. That puts it on the live site.
+   If something reads wrong, fix it the same way.
 
 ### App emails to practices and payers
 
@@ -241,20 +245,29 @@ If you do it yourself:
 
 ## Part 5 - One-time AWS setup for the website form
 
+Corrected 2026.09.27 by the Head of Development (DEC-258).
+
 The website sends through AWS SES using a role, not a password.
 That role must exist before the form can send.
 Until it does, the form shows its error message.
 
-This is an AWS change. Do it once, by hand or in the billie repo's CDK
-(`infra/aws/lib/constructs/iam-roles.ts`, next to `billie-prod-app`).
+**Do not create the role by hand in the AWS console.**
+It is built in the billie repo's CDK (`infra/aws/lib/constructs/iam-roles.ts`),
+so it can be rebuilt from code (DEC-103). Claude Code builds it; you deploy it.
+
+What the role allows (DEC-258 part 1):
+- Only the `billie-website` project, **Production only**. Preview deployments cannot send.
+  The website repo is public, so no preview build gets send rights.
+- Only `ses:SendEmail`, only from getbillie.com.au, only as info@ or isaiah@.
+- No SES configuration set. The website route must not pass `ConfigurationSetName`,
+  or every send fails.
 
 ### Step 1 - Check the Vercel team
 
 1. Open Vercel, then the `billie-website` project.
 2. Check it sits in the team `isaiahjdehoogs-projects`,
    the same team as the `billie` app.
-3. If it is in a different team, stop.
-   The role below would need a second OIDC provider.
+3. If it is in a different team, tell the Head of Development before deploying.
 
 ### Step 2 - Turn on OIDC in Vercel
 
@@ -262,86 +275,17 @@ This is an AWS change. Do it once, by hand or in the billie repo's CDK
 2. Turn on **OIDC Federation**, mode **Team**.
 3. Save.
 
-### Step 3 - Create the IAM role in AWS
+### Step 3 - Deploy the role
 
-1. AWS console, region Sydney (ap-southeast-2), then **IAM**, then **Roles**.
-2. **Create role**, then **Custom trust policy**.
-3. Paste the trust policy below.
-4. Skip adding managed permissions.
-5. Name it `billie-prod-website-mailer`. Create it.
-6. Open the role, then **Add permissions**, then **Create inline policy**, then **JSON**.
-7. Paste the permissions policy below.
-   Name it `WebsiteLeadSend`. Save.
-8. Copy the role's ARN.
-
-The Vercel OIDC provider already exists in the account (the app uses it).
-Don't create a second one.
-
-Trust policy:
-
-```json
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Principal": {
-        "Federated": "arn:aws:iam::435958718453:oidc-provider/oidc.vercel.com/isaiahjdehoogs-projects"
-      },
-      "Action": "sts:AssumeRoleWithWebIdentity",
-      "Condition": {
-        "StringEquals": {
-          "oidc.vercel.com/isaiahjdehoogs-projects:aud": "https://vercel.com/isaiahjdehoogs-projects"
-        },
-        "StringLike": {
-          "oidc.vercel.com/isaiahjdehoogs-projects:sub": "owner:isaiahjdehoogs-projects:project:billie-website:environment:*"
-        }
-      }
-    }
-  ]
-}
-```
-
-`environment:*` lets Preview and Production both send,
-so a preview can be tested.
-To lock it to live only, change `*` to `production`.
-
-Permissions policy:
-
-```json
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Sid": "WebsiteLeadSend",
-      "Effect": "Allow",
-      "Action": "ses:SendEmail",
-      "Resource": [
-        "arn:aws:ses:ap-southeast-2:435958718453:identity/getbillie.com.au",
-        "arn:aws:ses:ap-southeast-2:435958718453:configuration-set/billie-prod-default"
-      ],
-      "Condition": {
-        "StringEquals": {
-          "ses:FromAddress": [
-            "info@getbillie.com.au",
-            "isaiah@getbillie.com.au"
-          ]
-        }
-      }
-    }
-  ]
-}
-```
-
-This role can only send email, only from getbillie.com.au,
-and only as info@ or isaiah@. It can't read or change anything.
+1. The Head of Development gives you the exact `cdk deploy` command
+   once the billie repo's infrastructure PR has merged.
+2. The same message gives you the command that prints the role's ARN.
 
 ### Step 4 - Give Vercel the role
 
 1. `billie-website` project, then **Settings**, then **Environment Variables**.
-2. Add `AWS_ROLE_ARN` = the ARN from Step 3.
-   Tick **Production** and **Preview**.
-3. Redeploy the preview (Deployments, the latest preview, then Redeploy).
+2. Add `AWS_ROLE_ARN` = the ARN from Step 3. Tick **Production** only.
+3. Redeploy Production.
 
 ### Step 5 - Test
 

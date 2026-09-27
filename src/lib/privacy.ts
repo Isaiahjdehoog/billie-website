@@ -202,7 +202,6 @@ export const privacySections: Section[] = [
           "Vercel: hosts this website and the BiLLiE app, and provides the website's visitor counts.",
           "Google: hosts our email accounts, including the inbox that receives website enquiries.",
           "Resend: sends the BiLLiE app's sign-in emails.",
-          "A monitoring service that receives technical logs from the BiLLiE app.",
         ],
       },
       {
@@ -226,8 +225,7 @@ export const privacySections: Section[] = [
       {
         list: [
           "Sign-in emails for the BiLLiE app are sent through Resend, which is based in the United States. They contain your email address and a sign-in link or code.",
-          "Vercel, which is based in the United States, receives the anonymous visit data described in section 14 and keeps short-lived request logs.",
-          "The monitoring service that receives technical logs from the BiLLiE app may store them outside Australia.",
+          "Vercel, which is based in the United States, receives the anonymous visit data described in section 14 and keeps short-lived request logs for this website and the BiLLiE app.",
         ],
       },
       {

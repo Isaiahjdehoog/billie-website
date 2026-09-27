@@ -17,9 +17,6 @@ const AUTOREPLY_FROM = "Isaiah de Hoog <isaiah@getbillie.com.au>";
 const AUTOREPLY_REPLY_TO = "isaiah@getbillie.com.au";
 
 const SES_REGION = "ap-southeast-2";
-// The app's existing SES configuration set, so bounces and complaints are
-// recorded. The app's SES webhook no-ops any message id it doesn't know.
-const SES_CONFIGURATION_SET = "billie-prod-default";
 
 // Auth is Vercel OIDC: the function swaps its Vercel token for short-lived AWS
 // credentials on the role in AWS_ROLE_ARN. No long-lived keys anywhere.
@@ -43,7 +40,6 @@ async function sendText(
       FromEmailAddress: email.from,
       Destination: { ToAddresses: [email.to] },
       ReplyToAddresses: [email.replyTo],
-      ConfigurationSetName: SES_CONFIGURATION_SET,
       Content: {
         Simple: {
           Subject: { Data: email.subject, Charset: "UTF-8" },
