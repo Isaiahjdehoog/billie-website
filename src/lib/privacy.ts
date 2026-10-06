@@ -14,7 +14,7 @@
 // -----------------------------------------------------------------------------
 
 export const EFFECTIVE_DATE = "27 September 2026";
-export const LAST_UPDATED = "27 September 2026";
+export const LAST_UPDATED = "6 October 2026";
 export const PRIVACY_EMAIL = "info@getbillie.com.au";
 
 export type Block =
@@ -55,7 +55,7 @@ export const privacySections: Section[] = [
         p: "As the operator of BiLLiE. When you visit our website, send us an enquiry, or use a BiLLiE account, we decide what information to collect and why. We are directly responsible to you for that information.",
       },
       {
-        p: "As a service provider to your health practice. When a practice uses BiLLiE to prepare and send invoices, we handle patient information on that practice's instructions and on its behalf. The practice holds the relationship with the patient and remains responsible for the clinical record. We use that information only to deliver the billing service the practice has asked for. We do not use it for our own purposes, we do not sell it, and we do not use it to train artificial intelligence models.",
+        p: "As a service provider to your health practice. When a practice uses BiLLiE to prepare and send invoices, we handle patient information on that practice's instructions and on its behalf. The practice holds the relationship with the patient and remains responsible for the clinical record. We use that information only to deliver the billing service the practice has asked for, and to check and improve how accurately BiLLiE does it, using copies held in Australia. We do not sell it, we do not use it for advertising, and we do not use it to train artificial intelligence models.",
       },
       {
         p: "If you are a patient and you want to access, correct, or complain about your health information, the fastest path is to contact your treating practice. You can also contact us using the details in section 13, and we will work with your practice to respond.",
@@ -94,9 +94,6 @@ export const privacySections: Section[] = [
           "roughly how many invoices your practice sends each week",
           "anything else you choose to tell us (optional)",
         ],
-      },
-      {
-        p: "If you joined our earlier waitlist on app.getbillie.com.au, we hold the email address you gave us.",
       },
       { h3: "When you visit this website" },
       {
@@ -182,7 +179,7 @@ export const privacySections: Section[] = [
         p: "You can ask us about a decision. If an automated step in BiLLiE has affected you, contact us using the details in section 13 and ask what information was used and how the step works. Where it concerns a claim, we will respond together with your practice and the payer.",
       },
       {
-        p: "We are reviewing this section against the automated decision-making rules that start under the Privacy Act on 10 December 2026, and will update it before that date.",
+        p: "From 10 December 2026, the Privacy Act requires organisations to explain in their privacy policy when computer programs make, or substantially help make, decisions that could significantly affect people. This section is that explanation. Practices that use BiLLiE can ask us for wording to use in their own privacy policy.",
       },
     ],
   },
@@ -220,6 +217,9 @@ export const privacySections: Section[] = [
       { h3: "Website enquiries" },
       {
         p: "When you send the enquiry form, it is processed by our website host in Sydney and sent as an email through Amazon Web Services in Sydney. That email, and our confirmation email to you, is then held in our email accounts hosted by Google. Google may store email outside Australia, including in the United States.",
+      },
+      {
+        p: "If you email us directly, including info@getbillie.com.au or support@getbillie.com.au, that email is held in our Google-hosted accounts and may be stored outside Australia. Please do not put patient details in an email to us - use the BiLLiE app instead.",
       },
       { h3: "Other information that may leave Australia" },
       {

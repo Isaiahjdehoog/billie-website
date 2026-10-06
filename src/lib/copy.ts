@@ -199,7 +199,7 @@ export const footer = {
   // Line 4 must render the real copyright glyph U+00A9, not the ASCII fallback.
   // "Vilosoft" is a sole trader - never add "Pty Ltd".
   lines: [
-    "BiLLiE is operated by Vilosoft, Australia. Clinic and claim data is hosted in Australia (AWS ap-southeast-2) and used only to operate BiLLiE.",
+    "BiLLiE is operated by Vilosoft, Australia. Clinic and claim data is hosted in Australia (AWS ap-southeast-2) and used only to run and improve BiLLiE.",
     "BiLLiE sends individual, claim-specific correspondence to payers on your clinic's behalf. Never bulk email. Never marketing email.",
     "Contact info@getbillie.com.au",
     "© 2026 Vilosoft",
